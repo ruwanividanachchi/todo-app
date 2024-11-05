@@ -2,15 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { pool } from './db.js';
 import { createHash } from 'crypto';
-import pkg from 'jsonwebtoken'; // Default import
-const { sign } = pkg; // Destructure 'sign' from the imported package
+import pkg from 'jsonwebtoken';
+const { sign } = pkg;
 
-// Correct way to get __dirname in ES module
+// Define __dirname for ES modules
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const initializeTestDb = () => {
-    // Correctly resolve the path to the SQL file
-    const sqlFilePath = path.join(__dirname, 'test_todo.sql');
+    // Directly specify the path to the SQL file
+    const sqlFilePath = path.resolve(__dirname, '..', 'test_todo.sql');
 
     // Check if the file exists before reading
     if (!fs.existsSync(sqlFilePath)) {
